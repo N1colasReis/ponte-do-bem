@@ -10,6 +10,20 @@ from ..schemas import InstituicaoResponse
 router = APIRouter(prefix="/api/instituicoes", tags=["Instituições"])
 
 
+# ATENÇÃO: Rotas estáticas (como /bairros) DEVEM vir SEMPRE antes de rotas dinâmicas ({instituicao_id})
+@router.get("/bairros", response_model=List[str])
+def listar_bairros(db: Session = Depends(get_db)):
+    """
+    Retorna a lista de bairros únicos onde existem instituições ativas.
+    """
+    bairros = db.query(Instituicao.bairro).filter(
+        Instituicao.ativo == True, 
+        Instituicao.bairro.isnot(None)
+    ).distinct().order_by(Instituicao.bairro).all()
+    
+    return [b[0] for b in bairros if b[0]]
+
+
 @router.get("/", response_model=List[InstituicaoResponse])
 def listar_instituicoes(
     nome: Optional[str] = Query(None, description="Busca por nome da instituição"),
@@ -38,35 +52,17 @@ def listar_instituicoes(
         for inst in todas_instituicoes:
             nome_inst = inst.nome.lower()
             
-            # Avalia a similaridade entre o texto buscado e o nome no banco
             score_parcial = fuzz.partial_ratio(nome_busca, nome_inst)
             score_token = fuzz.token_set_ratio(nome_busca, nome_inst)
             score_max = max(score_parcial, score_token)
 
-            # Aceita combinações com pelo menos 60% de similaridade
             if score_max >= 60:
                 instituicoes_filtradas.append((inst, score_max))
 
-        # Ordena as instituições das mais similares para as menos similares
         instituicoes_filtradas.sort(key=lambda x: x[1], reverse=True)
         return [item[0] for item in instituicoes_filtradas]
 
     return todas_instituicoes
-
-
-# Rotas estáticas vêm antes de parâmetros dinâmicos ({instituicao_id})
-@router.get("/bairros", response_model=List[str])
-def listar_bairros(db: Session = Depends(get_db)):
-    """
-    Retorna a lista de bairros únicos onde existem instituições ativas.
-    """
-    bairros = db.query(Instituicao.bairro)\
-                .filter(Instituicao.ativo == True, Instituicao.bairro.isnot(None))\
-                .distinct()\
-                .order_by(Instituicao.bairro)\
-                .all()
-    
-    return [b[0] for b in bairros]
 
 
 @router.get("/{instituicao_id}", response_model=InstituicaoResponse)
