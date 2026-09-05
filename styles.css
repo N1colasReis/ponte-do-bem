@@ -1062,7 +1062,10 @@ html, body {
         text-align: center;
         gap: 30px;
     }
-
+    
+    .header-right {
+        display: none !important;
+    }
     .faq-section, 
     .contato-section, 
     .logo-parceiro-section {
