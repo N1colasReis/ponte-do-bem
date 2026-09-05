@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ponte do Bem - Pindamonhangaba</title>
+    <link rel="icon" type="image/png" href="static/Imagens/PonteDoBemRoundLogo.png">
+    <link rel="stylesheet" href="styles.css">
+    <!-- FontAwesome para os ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- 1. Header principal azul de ponta a ponta no topo -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="header-left">
+                <img src="static/Imagens/PonteDoBemLogoOutLine.png" alt="Logo Ponte do Bem" class="logo-principal">
+                <div class="header-titulos">
+                    <h1>Ponte do Bem</h1>
+                    <p>Construindo Esperança e Oportunidades</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <img src="static/Imagens/UniFunvicLogoTexto.png" alt="Logo UniFunvic" class="logo-parceiro">
+            </div>
+        </div>
+    </header>
+
+
+
+
+
+
+<!-- Seção do Card Informativo Tradicional -->
+<section class="secao-informativa introducao-card">
+    <div class="info-container">
+        <div class="info-imagem">
+            <img src="static/ImagemInformativas/PonteDoBemLogo4x4Texto.jpeg" alt="Solidariedade em Pindamonhangaba">
+        </div>
+        <div class="info-texto">
+            <h1>Conectando quem quer ajudar em Pinda</h1>
+            <p>
+                A <strong>Ponte do Bem</strong> nasceu para facilitar a solidariedade em nossa cidade. 
+                Muitas vezes queremos ajudar, mas não sabemos onde entregar ou o que cada instituição precisa no momento.
+            </p>
+            <p>
+                Aqui você encontra locais, horários e categorias de doações aceitas por 
+                instituições que transformam a vida de quem mais precisa em <strong>Pindamonhangaba</strong>.
+            </p>
+        </div>
+    </div>
+</section>
+
+
+<section class="secao-informativa parceria-unifunvic">
+    <div class="info-container reverse">
+        <div class="info-texto">
+            <h2>Parceria UniFunvic</h2>
+            <p>O projeto <strong>Ponte do Bem</strong> orgulha-se de estar conectado à <strong>UniFunvic</strong>. Unimos forças para ampliar o alcance das ações sociais em Pindamonhangaba, utilizando a tecnologia e o ambiente acadêmico para transformar a realidade da nossa comunidade.</p>
+            
+            <div class="link-parceiro">
+                <p>Saiba mais sobre os projetos da instituição:</p>
+                <a href="https://unifunvic.edu.br" target="_blank" class="btn-link-externo">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Visitar site da UniFunvic
+                </a>
+            </div>
+        </div>
+        
+        <div class="info-imagem">
+            <img src="static/ImagemInformativas/UniFunvicLogoPng.png" alt="Logo UniFunvic Pindamonhangaba">
+        </div>
+    </div>
+</section>
+
+<section class="secao-informativa">
+    <div class="info-container">
+        <div class="info-imagem">
+            <img src="static/ImagemInformativas/DoacaoResponsavel.png" alt="Exemplo de doação bem cuidada">
+        </div>
+        <div class="info-texto">
+            <h2>Doação não é descarte</h2>
+            <p>Para que sua ajuda seja realmente útil, doe apenas itens em <strong>bom estado de conservação</strong>. Lembre-se: se não serve para você por estar estragado ou sujo, provavelmente também não servirá para o próximo.</p>
+            
+            <div class="alerta-doacao">
+                <h3><i class="fa-solid fa-circle-exclamation"></i> O que NÃO doar:</h3>
+                <ul>
+                    <li><i class="fa-solid fa-xmark"></i> Roupas rasgadas, manchadas ou com odor.</li>
+                    <li><i class="fa-solid fa-xmark"></i> Sapatos sem sola ou descascando.</li>
+                    <li><i class="fa-solid fa-xmark"></i> Alimentos vencidos ou embalagens abertas.</li>
+                    <li><i class="fa-solid fa-xmark"></i> Produtos abertos ou sem lacre de fábrica.</li>
+                    <li><i class="fa-solid fa-xmark"></i> Doe o que você gostaria de receber.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- 2. Container Principal Centralizado -->
+    <div class="app-container">
+        
+        <!-- Cabeçalho Interno -->
+        <header class="header">
+            <div class="logo-container">
+                <h1>Ponte do Bem</h1>
+            </div>
+            <p>Conectando quem quer ajudar às instituições de Pindamonhangaba</p>
+        </header>
+
+        <!-- Barra de Busca e Dropdown de Filtros Embutido -->
+        <section class="filter-section">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="input-busca" placeholder="Buscar por nome da instituição...">
+                
+                <!-- Wrapper do Botão de Filtro e seu Menu Dropdown -->
+                <div class="filter-dropdown-wrapper">
+                    <button type="button" id="btn-filtro" class="btn-filtro" title="Filtros avançados">
+                        <i class="fa-solid fa-sliders"></i>
+                        <span>Filtros</span>
+                    </button>
+
+                    <!-- Menu Dropdown (Categorias + Bairros) -->
+                    <div id="dropdown-conteudo" class="dropdown-menu hidden">
+                        <!-- Grupo de Categorias -->
+                        <div class="filter-group">
+                            <label class="filter-label"><i class="fa-solid fa-layer-group"></i> Categorias</label>
+                            <div class="filter-tags" id="categorias-tags">
+                                <button class="tag-btn active" data-categoria="">Todas</button>
+                                <button class="tag-btn" data-categoria="alimentos">Alimentos</button>
+                                <button class="tag-btn" data-categoria="roupas">Roupas</button>
+                                <button class="tag-btn" data-categoria="higiene">Higiene</button>
+                                <button class="tag-btn" data-categoria="dinheiro">Dinheiro</button>
+                                <button class="tag-btn" data-categoria="outros">Outros</button>
+                            </div>
+                        </div>
+
+                        <!-- Grupo de Bairros (Populados via API no JS) -->
+                        <div class="filter-group">
+                            <label for="select-bairro" class="filter-label"><i class="fa-solid fa-location-dot"></i> Bairro</label>
+                            <select id="select-bairro" class="select-bairro">
+                                <option value="">Carregando bairros...</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Área Principal de Conteúdo (Cards de ONGs / Skeletons) -->
+        <main class="content-area">
+            <div id="grid-instituicoes" class="grid-cards">
+                <!-- Os cards e skeletons serão injetados dinamicamente via JS -->
+            </div>
+        </main>
+
+        <!-- Rodapé interno do container -->
+        <footer class="footer">
+            <p>&copy; 2026 Ponte do Bem - Pindamonhangaba/SP</p>
+        </footer>
+
+    </div>
+
+    <!-- Modais (Fora do container principal para sobreposição correta) -->
+    
+    <!-- Modal de Vídeo -->
+    <div id="video-modal" class="video-modal hidden">
+        <div class="modal-content">
+            <button id="btn-close-modal" class="btn-close-modal">&times;</button>
+            <div id="modal-video-container" class="modal-video-container"></div>
+        </div>
+    </div>
+
+    <!-- Modal de Detalhes da Instituição -->
+    <div id="details-modal" class="video-modal hidden">
+        <div class="modal-content modal-details-content">
+            <button id="btn-close-details-modal" class="btn-close-modal">&times;</button>
+            
+            <div id="details-media-container" class="details-media-container"></div>
+            
+            <div class="details-body">
+                <h2 id="details-title" class="details-title"></h2>
+                
+                <p id="details-address" class="card-address"></p>
+                <p id="details-phone" class="card-phone"></p>
+                
+                <div id="details-badges" class="badge-container"></div>
+                
+                <div class="details-divider"></div>
+                
+                <h4>Sobre a Instituição</h4>
+                <p id="details-info" class="details-info-text"></p>
+                
+                <div id="details-social-container" class="details-social-container"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <!-- Rodapé Estendido (Mesmo estilo e cor do header) -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="faq-section">
+                <h3>Perguntas Frequentes</h3>
+                <details>
+                    <summary>Como posso realizar uma doação?</summary>
+                    <p>Basta escolher uma categoria, verificar o local mais próximo e entrar em contato pelo telefone indicado.</p>
+                </details>
+                <details>
+                    <summary>Vocês buscam a doação em casa?</summary>
+                    <p>No momento, a Ponte do Bem atua como um guia; o transporte da doação deve ser combinado diretamente com a instituição.</p>
+                </details>
+            </div>
+
+            <div class="contato-section">
+                <h3>Fale Conosco</h3>
+                <a href="https://www.instagram.com/ponte_dobemoficial/" target="_blank" class="link-instagram">
+                    <i class="fab fa-instagram"></i> @ponte_dobemoficial
+                </a>
+                <p>Pindamonhangaba, SP</p>
+            </div>
+
+            <div class="logo-parceiro-section">
+                <img src="static/Imagens/UniFunvicLogoTexto.png" alt="Logo UniFunvic" class="logo-footer-funvic">
+            </div>
+        </div>
+    </footer>
+
+
+
+
+
+    <script src="script.js"></script>
+</body>
+</html>
