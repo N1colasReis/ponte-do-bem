@@ -1,12 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 from .routes import instituicoes
 
 app = FastAPI(title="API Ponte do Bem", version="2.0")
 
-# Libera o acesso para o Frontend chamar a API sem bloqueios no navegador
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -15,12 +15,21 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Serve as imagens salvas na pasta static
+# 1. Monta a pasta static para as imagens das instituições
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-# Registra as rotas da aplicação
+# 2. Registra as rotas da API
 app.include_router(instituicoes.router)
 
+# 3. Rotas para entregar o Front-end diretamente pela raiz
 @app.get("/")
-def home():
-    return {"status": "API Ponte do Bem rodando com sucesso em Pindamonhangaba!"}
+def serve_index():
+    return FileResponse("index.html")
+
+@app.get("/script.js")
+def serve_script():
+    return FileResponse("script.js")
+
+@app.get("/styles.css")
+def serve_style():
+    return FileResponse("styles.css")

@@ -1,4 +1,4 @@
-const API_URL = "https://ponte-do-bem.onrender.com";
+const API_URL = "";
 
 // Mapeamento dos elementos do DOM
 const grid = document.getElementById("grid-instituicoes");
