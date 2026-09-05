@@ -176,7 +176,7 @@ async function carregarBairros() {
     if (!selectBairro) return;
 
     try {
-        const urlBairros = `${API_URL.replace(/\/$/, "")}/bairros`;
+        const urlBairros = `${API_URL.replace(/\/$/, "")}/api/instituicoes/bairros`;
         const response = await fetch(urlBairros);
         
         if (!response.ok) throw new Error("Erro ao buscar bairros");
@@ -227,7 +227,7 @@ async function carregarInstituicoes() {
     exibirSkeletons();
 
     try {
-        const url = new URL(API_URL);
+        const url = new URL(`${API_URL.replace(/\/$/, "")}/api/instituicoes/`);
         const termoBusca = inputBusca ? inputBusca.value.trim() : "";
         const bairroSelecionado = selectBairro ? selectBairro.value : "";
 
