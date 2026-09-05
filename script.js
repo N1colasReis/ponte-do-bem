@@ -78,10 +78,11 @@ function abrirVideoModal(videoUrl, imagemPoster) {
             <iframe src="${embedUrl}?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         `;
     } else {
+        const baseUrl = API_URL ? API_URL.replace(/\/$/, "") : window.location.origin;
         const nomeVideo = videoUrl.replace(/^(\/)?(static\/)?/i, '');
         const urlVideoCompleta = videoUrl.startsWith("http")
             ? videoUrl
-            : `${API_URL.replace(/\/$/, "")}/static/${nomeVideo}`;
+            : `${baseUrl}/static/${nomeVideo}`;
         
         modalVideoContainer.innerHTML = `
             <video controls autoplay poster="${imagemPoster}">
@@ -176,7 +177,9 @@ async function carregarBairros() {
     if (!selectBairro) return;
 
     try {
-        const urlBairros = `${API_URL.replace(/\/$/, "")}/api/instituicoes/bairros`;
+        const baseUrl = API_URL ? API_URL.replace(/\/$/, "") : window.location.origin;
+        const urlBairros = `${baseUrl}/api/instituicoes/bairros`;
+        
         const response = await fetch(urlBairros);
         
         if (!response.ok) throw new Error("Erro ao buscar bairros");
@@ -227,7 +230,10 @@ async function carregarInstituicoes() {
     exibirSkeletons();
 
     try {
-        const url = new URL(`${API_URL.replace(/\/$/, "")}/api/instituicoes/`);
+        // Se API_URL estiver vazia, pega a origem atual do site (ex: https://ponte-do-bem.onrender.com)
+        const baseUrl = API_URL ? API_URL.replace(/\/$/, "") : window.location.origin;
+        const url = new URL(`${baseUrl}/api/instituicoes/`);
+        
         const termoBusca = inputBusca ? inputBusca.value.trim() : "";
         const bairroSelecionado = selectBairro ? selectBairro.value : "";
 
@@ -262,9 +268,10 @@ function renderizarCards(lista) {
     }
 
     lista.forEach(item => {
+        const baseUrl = API_URL ? API_URL.replace(/\/$/, "") : window.location.origin;
         const nomeImagem = item.imagem_url ? item.imagem_url.replace(/^(\/)?(static\/)?/i, '') : '';
         const urlImagemCompleta = nomeImagem 
-            ? `${API_URL.replace(/\/$/, "")}/static/${nomeImagem}` 
+            ? `${baseUrl}/static/${nomeImagem}` 
             : 'https://placehold.co/300x180?text=Sem+Imagem';
 
         const possuiVideo = Boolean(item.video_url);
