@@ -1,4 +1,4 @@
-const API_URL = "http://127.0.0.1:8000/api/instituicoes/";
+const API_URL = "https://ponte-do-bem.onrender.com";
 
 // Mapeamento dos elementos do DOM
 const grid = document.getElementById("grid-instituicoes");
@@ -81,7 +81,7 @@ function abrirVideoModal(videoUrl, imagemPoster) {
         const nomeVideo = videoUrl.replace(/^(\/)?(static\/)?/i, '');
         const urlVideoCompleta = videoUrl.startsWith("http")
             ? videoUrl
-            : `http://127.0.0.1:8000/static/${nomeVideo}`;
+            : `${API_URL.replace(/\/$/, "")}/static/${nomeVideo}`;
         
         modalVideoContainer.innerHTML = `
             <video controls autoplay poster="${imagemPoster}">
@@ -252,7 +252,6 @@ async function carregarInstituicoes() {
     }
 }
 
-// 7. Renderiza os cards
 function renderizarCards(lista) {
     if (!grid) return;
     grid.innerHTML = "";
@@ -265,7 +264,7 @@ function renderizarCards(lista) {
     lista.forEach(item => {
         const nomeImagem = item.imagem_url ? item.imagem_url.replace(/^(\/)?(static\/)?/i, '') : '';
         const urlImagemCompleta = nomeImagem 
-            ? `http://127.0.0.1:8000/static/${nomeImagem}` 
+            ? `${API_URL.replace(/\/$/, "")}/static/${nomeImagem}` 
             : 'https://placehold.co/300x180?text=Sem+Imagem';
 
         const possuiVideo = Boolean(item.video_url);
