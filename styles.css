@@ -964,9 +964,48 @@ html, body {
     font-size: 0.9rem;
 }
 
-/* =================================================================
-   RESPONSIVIDADE (CELULARES E TABLETS)
-   ================================================================ */
+/* Fundo da tela de carregamento cobrindo a tela inteira */
+#loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #0b2545; /* Use a cor de fundo do tema do seu site */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    transition: opacity 0.4s ease;
+}
+
+/* Tamanho e animação de pulsação suave da logo */
+.logo-loader {
+    width: 120px; /* Ajuste o tamanho ideal da logo */
+    height: auto;
+    animation: pulsarLogo 1.4s infinite ease-in-out;
+}
+
+@keyframes pulsarLogo {
+    0% {
+        transform: scale(0.9);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0.9);
+        opacity: 0.5;
+    }
+}
+
+.loader-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
 @media (max-width: 768px) {
     /* Header Responsivo Ajustado */
     header {

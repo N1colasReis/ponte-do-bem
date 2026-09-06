@@ -27,6 +27,14 @@ const detailsSocialContainer = document.getElementById("details-social-container
 let categoriaSelecionada = "";
 let debounceTimer = null;
 
+window.addEventListener("load", () => {
+    const loader = document.getElementById("loader-overlay");
+    if (loader) {
+        loader.classList.add("loader-hidden");
+        setTimeout(() => loader.remove(), 400); // Remove o elemento do HTML após o fade
+    }
+});
+
 // Algoritmo Fisher-Yates para embaralhar array
 function embaralharArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
