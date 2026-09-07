@@ -35,6 +35,29 @@ window.addEventListener("load", () => {
     }
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+    const secoes = document.querySelectorAll(".secao-informativa");
+
+    const observerOptions = {
+        root: null, // usa a janela do navegador como referência
+        rootMargin: "0px",
+        threshold: 0.15 // dispara quando 15% da seção estiver visível na tela
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target); // Para de observar após animar uma vez
+            }
+        });
+    }, observerOptions);
+
+    secoes.forEach(secao => {
+        observer.observe(secao);
+    });
+});
+
 // Algoritmo Fisher-Yates para embaralhar array
 function embaralharArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
